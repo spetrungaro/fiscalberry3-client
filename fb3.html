@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fiscalberry3 - Socket.io</title>
+    <link rel="icon" type="image/x-icon" href="resources/images/icon.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./global/css/bootstrap.min.css"/>
+    <script src="global/js/jquery-3.6.0.min.js"></script>
+    <script src="global/js/socket.io.min.js"></script>
+    <script src="resources/js/socketio.fb.js"></script>
+    <script src="resources/js/fiscalberry.js"></script>
+    <script src="index.js" defer></script>
+    
+</head>
+<body>
+    <div class="root" id="root">
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="headercito">
+            <div class="container-fluid">
+                <img src="./resources/images/icon.png" width="22", height="22">
+                <a class="navbar-brand" href="#">Fiscalberry3</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/paxapos/fiscalberry/wiki" target="_blank" rel="noopener noreferrer">Wiki</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" id="sendPrintersBtn"  role="button">Impresoras</a></li>
+                                <li><a class="dropdown-item" id="requestClients" role="button">Clientes</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" id="back-to-fb">Ir a FiscalberryWS</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-outline-primary" id="logInOutBtn" type="button">Log in</button>
+                        </li>                        
+                    </ul>                    
+                    <form class="d-flex">
+                        <input class="form-control me-2" id="host" type="text" placeholder="localhost" aria-label="Host">
+                        <input class="form-control me-2" id="port" type="text" placeholder="12000" aria-label="Port">
+                        <button class="btn btn-outline-success" id="conectar" type="button">Conectar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <div class="row gy-3 gx-4 align-items-center" style="margin: auto;" >
+            <div class="col-sm-1">
+                <label for="impresoras-list">Impresoras:</label>
+                <select class="form-select" id="impresoras-list" aria-label="Default select example">
+                    
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label for="impresoras-list">Comandos:</label>
+                <select class="form-select" id="comandos-list" aria-label="Default select example">
+                </select>
+            </div>
+            <div class="col-sm-1 text-center">
+                <button type="button" class="btn btn-warning"  id="enviar-comando">Enviar</button>
+            </div>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="toast" id="liveToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1500">
+        <div class="toast-header">
+            <span class="material-icons" id="icon-toast">wifi_tethering</span>
+            <!-- <img src="./resources/images/icon.png" width="30" height="30" class="rounded me-2" alt="..."> -->
+            <strong class="me-auto m-2" id="mensaje-toast">Socket.io</strong>
+            <small class="text-muted">Now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" style="background-color: rgb(241, 241, 241);" id="cuerpo-toast">Conectado con exito.</div>
+    </div>
+</div>
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <form class="modal-content" id ="submitForm" onsubmit="handleSubmit()">
+                <div class="modal-header">
+                    <span class="material-icons">account_circle</span>
+                    <h5 class="modal-title m-2">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="usernameInput" placeholder="name@example.com">
+                        <label for="floatingInput">Username</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="passwordInput" placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="submitLoginBtn"">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<script src="global/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
